@@ -1,8 +1,6 @@
 package main
 
-import (
-	"clase_3_mysql_driver/handlers"
-)
+import "clase_3_mysql_driver/handlers"
 
 func main() {
 	// handlers.List()
@@ -11,6 +9,7 @@ func main() {
 	// 	Telefono: "+9998653"}
 	// handlers.Insert(cliente)
 	// handlers.Edit(cliente, 3)
-	handlers.Delete(3)
-	handlers.List()
+	// handlers.Delete(3)
+	// handlers.List()
+	handlers.Execute()
 }

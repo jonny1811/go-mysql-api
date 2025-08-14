@@ -1,10 +1,13 @@
 package handlers
 
 import (
+	"bufio"
 	"clase_3_mysql_driver/connect"
 	"clase_3_mysql_driver/models"
 	"fmt"
 	"log"
+	"os"
+	"strconv"
 )
 
 func List() {
@@ -90,4 +93,81 @@ func Delete(id int) {
 		panic(err)
 	}
 	fmt.Println("Se eliminó el registro exitosamente")
+}
+
+// ##################FUNCIONES DE TRABAJO
+var ID int
+var nombre, correo, telefono string
+
+func Execute() {
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Seleccione una opción : ")
+	fmt.Println("1- Listar clientes")
+	fmt.Println("2- Listar cliente por ID")
+	fmt.Println("3- Crear cliente")
+	fmt.Println("4- Editar cliente")
+	fmt.Println("5- Eliminar cliente")
+	if scanner.Scan() {
+		for {
+			if scanner.Text() == "1" {
+				List()
+				return
+			}
+			if scanner.Text() == "2" {
+				fmt.Println("Ingrese el ID del cliente : ")
+				if scanner.Scan() {
+					ID, _ = strconv.Atoi(scanner.Text())
+				}
+				ListById(ID)
+				return
+			}
+			if scanner.Text() == "3" {
+				fmt.Println("Ingrese el Nombre : ")
+				if scanner.Scan() {
+					nombre = scanner.Text()
+				}
+				fmt.Println("Ingrese el Email : ")
+				if scanner.Scan() {
+					correo = scanner.Text()
+				}
+				fmt.Println("Ingrese el Telefono : ")
+				if scanner.Scan() {
+					telefono = scanner.Text()
+				}
+				cliente := models.Cliente{Nombre: nombre, Correo: correo, Telefono: telefono}
+				Insert(cliente)
+				return
+			}
+			if scanner.Text() == "4" {
+				fmt.Println("Ingrese el ID del cliente : ")
+				if scanner.Scan() {
+					ID, _ = strconv.Atoi(scanner.Text())
+				}
+				fmt.Println("Ingrese el Nombre : ")
+				if scanner.Scan() {
+					nombre = scanner.Text()
+				}
+				fmt.Println("Ingrese el Email : ")
+				if scanner.Scan() {
+					correo = scanner.Text()
+				}
+				fmt.Println("Ingrese el Telefono : ")
+				if scanner.Scan() {
+					telefono = scanner.Text()
+				}
+				cliente := models.Cliente{Nombre: nombre, Correo: correo, Telefono: telefono}
+				Insert(cliente)
+				Edit(cliente, ID)
+				return
+			}
+			if scanner.Text() == "5" {
+				fmt.Println("Ingrese el ID del cliente : ")
+				if scanner.Scan() {
+					ID, _ = strconv.Atoi(scanner.Text())
+				}
+				Delete(ID)
+				return
+			}
+		}
+	}
 }
