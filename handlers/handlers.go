@@ -70,3 +70,14 @@ func Insert(cliente models.Cliente) {
 	fmt.Println(result)
 	fmt.Println("Se creó el registro exitosamente")
 }
+
+func Edit(cliente models.Cliente, id int) {
+	connect.Connect()
+	sql := "UPDATE clientes set nombre=?, correo=?, telefono=? WHERE id=?;"
+	result, err := connect.Db.Query(sql, cliente.Nombre, cliente.Correo, cliente.Telefono, id)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(result)
+	fmt.Println("Se editó el registro exitosamente")
+}

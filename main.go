@@ -8,8 +8,9 @@ import (
 func main() {
 	// handlers.List()
 	// handlers.ListById(1)
-	cliente := models.Cliente{Nombre: "Marcos Ñamandu", Correo: "marcos@hotmail.com",
-		Telefono: "+96656898"}
-	handlers.Insert(cliente)
+	cliente := models.Cliente{Nombre: "Jose Amarilla", Correo: "jose.amarilla@hotmail.com",
+		Telefono: "+9998653"}
+	// handlers.Insert(cliente)
+	handlers.Edit(cliente, 3)
 	handlers.List()
 }
