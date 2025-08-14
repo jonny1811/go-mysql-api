@@ -81,3 +81,13 @@ func Edit(cliente models.Cliente, id int) {
 	fmt.Println(result)
 	fmt.Println("Se editó el registro exitosamente")
 }
+
+func Delete(id int) {
+	connect.Connect()
+	sql := "DELETE FROM clientes WHERE id=?;"
+	_, err := connect.Db.Query(sql, id)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Se eliminó el registro exitosamente")
+}
